@@ -5,16 +5,24 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Instalando dependências na raiz do projeto...'
-                // CORREÇÃO: Removendo --prefix e dir(), pois o package.json está na raiz do WORKSPACE.
+                // O package.json está na raiz, então 'npm install' é executado aqui.
                 bat "npm install"
+            }
+        }
+
+        stage('Lint Code') {
+            steps {
+                echo 'Executando o linter...'
+                // O script 'lint' é executado na raiz (onde o binário está em node_modules).
+                bat "npm run lint"
             }
         }
 
         stage('Run Tests') {
             steps {
                 echo 'Executando os testes...'
-                // O erro de caminho do Jest deve ser corrigido aqui,
-                // pois o <rootDir> agora é a raiz (C:\...\teste).
+                // Este passo exige que o package.json tenha o caminho correto para jest.setup.js
+                // Ex: "setupFiles": ["<rootDir>/backend/fake_sql/jest.setup.js"]
                 bat "npm test"
             }
         }
