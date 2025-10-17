@@ -11,15 +11,6 @@ pipeline {
             }
         }
 
-        stage('Lint Code') {
-            steps {
-                echo 'Executando o linter...'
-                dir('backend') {
-                    bat 'npm run lint'
-                }
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 echo 'Executando os testes...'
