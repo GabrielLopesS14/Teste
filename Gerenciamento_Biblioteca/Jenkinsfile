@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                echo 'Entrando na pasta do backend para instalar dependências'
+                dir('backend') {
+                    bat 'npm install'
+                }
+            }
+        }
+
+        stage('Lint Code') {
+            steps {
+                echo 'Executando o linter...'
+                dir('backend') {
+                    bat 'npm run lint'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo 'Executando os testes...'
+                dir('backend') {
+                    bat 'npm test'
+                }
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                echo 'Compilando a aplicação...'
+                dir('backend') {
+                    bat 'npm run build'
+                }
+            }
+        }
+
+        stage('Start Application') {
+            steps {
+                echo 'Iniciando o servidor backend...'
+                dir('backend') {
+                    bat 'npm start'
+                }
+            }
+        }
+
+        stage('Security Analysis') {
+            steps {
+                echo 'Entrando na pasta do backend para análise de segurança...'
+                dir('backend') {
+                    echo 'Executando análise de segurança com npm audit...'
+                    bat 'npm audit'
+                }
+            }
+        }
+
+    }
+}

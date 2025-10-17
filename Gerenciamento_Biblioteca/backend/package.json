@@ -1,0 +1,31 @@
+{
+  "name": "biblioteca-backend",
+  "version": "1.0.0",
+  "description": "Backend do sistema de gerenciamento da biblioteca",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watchAll",
+    "lint": "eslint .",
+    "build": "echo 'Nao ha build para este projeto já que ainda estamos desenvolvendo o backend' && exit 0"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.14.3"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^3.1.10",
+    "supertest": "^6.0.0"
+  }
+  ,
+  "jest": {
+    "setupFiles": ["<rootDir>/fake_sql/jest.setup.js"]
+  }
+}
