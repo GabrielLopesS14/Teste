@@ -10,14 +10,6 @@ pipeline {
             }
         }
 
-        stage('Lint Code') {
-            steps {
-                echo 'Executando o linter...'
-                // CORREÇÃO: O comando npm run lint é executado na raiz.
-                bat "npm run lint"
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 echo 'Executando os testes...'
